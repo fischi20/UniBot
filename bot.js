@@ -1,79 +1,62 @@
-const { Client } = require('discord.js');
-const { config } = require('dotenv');
+const {
+    Client,
+    Collection
+} = require("discord.js");
+const {
+    token
+} = require("./config.json")
+const fs = require("fs");
 
 const client = new Client({
     disableEveryone: true
-});
-
-config({
-    path: __dirname + "/.env"
 })
 
+// Collections
+client.commands = new Collection();
+client.aliases = new Collection();
+client.categories = fs.readdirSync("./commands/");
+
+
+// Run the command loader
+["command"].forEach(handler => {
+    require(`./handler/${handler}`)(client);
+});
+
 client.on("ready", () => {
-    console.log(client.user.username)
+    console.log(`Hi, ${client.user.username} is now online!`);
 
     client.user.setPresence({
-        status: 'online',
+        status: "online",
         game: {
             name: "me getting developed",
             type: "WATCHING"
         }
-    })
+    });
 })
 
-client.on('message', async message => {
+client.on("message", async message => {
     const prefix = ">";
-
 
     if (message.author.bot) return;
     if (!message.guild) return;
     if (!message.content.startsWith(prefix)) return;
 
+    // If message.member is uncached, cache it.
+    if (!message.member) message.member = await message.guild.fetchMember(message);
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
-    switch (cmd) {
-        case "ping":
-            {
-                // Send a message
-                const msg = await message.channel.send(`🏓 Pinging....`);
+    if (cmd.length === 0) return;
 
-                // Edit the message
-                msg.edit(`🏓 Pong!\nLatency is ${Math.floor(msg.createdAt - message.createdAt)}ms`);
-                break;
-            }
-        case "calendar":
-            {
-                const msg = await message.channel.send(process.env.CALENDAR);
-                break;
-            }
-        case "github":
-            {
-                const msg = await message.channel.send(process.env.GITHUB)
-                break;
-            }
-        case "help":
-            {
-                const msg = await message.channel.send('The answer is no :)')
-                setTimeout(() => {
-                    msg.edit('ping: pings server \n' +
-                        'calender: sends a link to the google calender'
-                    )
-                }, 1500)
-                break;
-            }
-        case "no":
-            {
-                const msg = await message.channel.send('The answer is no :)')
-                break;
-            }
-        default:
-            {
-                const msg = await message.channel.send('send Welp')
-            }
-    }
-})
+    // Get the command
+    let command = client.commands.get(cmd);
+    // If none is found, try to find it by alias
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
 
+    // If a command is finally found, run the command
+    if (command)
+        command.run(client, message, args);
+});
 
-client.login(process.env.TOKEN);
+client.login(token);
