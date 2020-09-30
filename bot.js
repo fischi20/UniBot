@@ -43,9 +43,14 @@ client.on('message', async message => {
                 msg.edit(`🏓 Pong!\nLatency is ${Math.floor(msg.createdAt - message.createdAt)}ms`);
                 break;
             }
-        case "calender":
+        case "calendar":
             {
-                const msg = await message.channel.send('https://calendar.google.com/calendar/u/0?cid=YzBrM2UyZXNsa2V1M2RoNG1zNDRkbmJsaXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ');
+                const msg = await message.channel.send(process.env.CALENDAR);
+                break;
+            }
+        case "github":
+            {
+                const msg = await message.channel.send(process.env.GITHUB)
                 break;
             }
         case "help":
@@ -56,6 +61,11 @@ client.on('message', async message => {
                         'calender: sends a link to the google calender'
                     )
                 }, 1500)
+                break;
+            }
+        case "no":
+            {
+                const msg = await message.channel.send('The answer is no :)')
                 break;
             }
         default:
