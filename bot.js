@@ -14,7 +14,7 @@ const client = new Client({
 // Collections
 client.commands = new Collection();
 client.aliases = new Collection();
-client.categories = fs.readdirSync("./commands/");
+client.categories = fs.readdirSync("./commands/").filter(command => command != "moderation");
 
 
 // Run the command loader
