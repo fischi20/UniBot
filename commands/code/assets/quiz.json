@@ -1,0 +1,14 @@
+{
+    "code": [{
+        "name": "Hello World",
+        "language": "java",
+        "chapter": "Introduction",
+        "challenge": "Develop a small Hello World Programm in java",
+        "hints": ["System.out?"],
+        "starting_code": "commands/code/assets/defaultCode/HelloWorld.java",
+        "use_file": false
+    }],
+    "thumbnails": {
+        "java": "https://banner2.cleanpng.com/20190623/uxe/kisspng-logo-java-development-kit-portable-network-graphic-5d0f25d6871765.6875406615612738145533.jpg"
+    }
+}
