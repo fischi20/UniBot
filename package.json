@@ -4,7 +4,8 @@
     "description": "",
     "main": "bot.js",
     "scripts": {
-        "serve": "nodemon bot.js"
+        "serve": "nodemon bot.js",
+        "deploy": "node bot.js"
     },
     "author": "",
     "license": "ISC",

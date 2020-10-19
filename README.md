@@ -12,7 +12,7 @@ Install node packages
 
     npm i or npm install in the directory
 
-Create the .env file and fill out with the strutucre of .env.example (the TOKEN is the OAuth Token of the Discord Bot)
+Create the config.json file and fill out with the strutucre of config.example.json (the TOKEN is the OAuth Token of the Discord Bot)
 
 
 Run the server: 

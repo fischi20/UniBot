@@ -1,13 +1,23 @@
 {
     "code": [{
-        "name": "Hello World",
-        "language": "java",
-        "chapter": "Introduction",
-        "challenge": "Develop a small Hello World Programm in java",
-        "hints": ["System.out?"],
-        "starting_code": "commands/code/assets/defaultCode/HelloWorld.java",
-        "use_file": false
-    }],
+            "name": "Hello World",
+            "language": "java",
+            "chapter": "Introduction",
+            "challenge": "Develop a small Hello World Programm in java",
+            "hints": ["System.out?"],
+            "starting_code": "commands/code/assets/defaultCode/Challange.java",
+            "use_file": true
+        },
+        {
+            "name": "Print Variable",
+            "language": "java",
+            "chapter": "Introduction",
+            "challenge": "Create 2 integers x and y. Then create z with the value x*y and print it",
+            "hints": ["System.out?", "int variable = value;"],
+            "starting_code": "commands/code/assets/defaultCode/Challange.java",
+            "use_file": false
+        }
+    ],
     "thumbnails": {
         "java": "https://banner2.cleanpng.com/20190623/uxe/kisspng-logo-java-development-kit-portable-network-graphic-5d0f25d6871765.6875406615612738145533.jpg"
     }
